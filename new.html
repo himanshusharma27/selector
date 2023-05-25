@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Select Argument Operator</title>
+</head>
+<body>
+  <h1>Select Argument Operator</h1>
+
+  <select id="operatorSelect">
+    <option value="constant">Constant</option>
+    <option value="argument">Argument</option>
+    <option value="and">AND</option>
+    <option value="or">OR</option>
+  </select>
+
+  <select id="valueSelect">
+    <option value="true">True</option>
+    <option value="false">False</option>
+    <option value="undefined">Undefined</option>
+  </select>
+
+  <br>
+
+  <select id="operationSelect">
+    <option value="constant">Constant</option>
+    <option value="argument">Argument</option>
+    <option value="and">AND</option>
+    <option value="or">OR</option>
+  </select>
+
+  <select id="resultSelect">
+    <option value="true">True</option>
+    <option value="false">False</option>
+    <option value="undefined">Undefined</option>
+  </select>
+
+  <div id="result"></div>
+
+  <script>
+    // Get references to the select elements
+    var operatorSelect = document.getElementById("operatorSelect");
+    var valueSelect = document.getElementById("valueSelect");
+    var operationSelect = document.getElementById("operationSelect");
+    var resultSelect = document.getElementById("resultSelect");
+
+    // Get a reference to the result element
+    var resultElement = document.getElementById("result");
+
+    // Add event listeners to the select elements
+    operatorSelect.addEventListener("change", updateResult);
+    valueSelect.addEventListener("change", updateResult);
+    operationSelect.addEventListener("change", updateResult);
+    resultSelect.addEventListener("change", updateResult);
+
+    // Function to update the result based on the selected options
+    function updateResult() {
+      var selectedOperator = operatorSelect.value;
+      var selectedValue = valueSelect.value;
+      var selectedOperation = operationSelect.value;
+      var selectedResult = resultSelect.value;
+
+      // Perform the selected operation between X and the argument
+      var operationResult;
+      if (selectedOperation === "equals") {
+        operationResult = selectedValue == selectedResult;
+      } else if (selectedOperation === "notEquals") {
+        operationResult = selectedValue != selectedResult;
+      } else if (selectedOperation === "strictEquals") {
+        operationResult = selectedValue === selectedResult;
+      } else if (selectedOperation === "strictNotEquals") {
+        operationResult = selectedValue !== selectedResult;
+      }
+
+      // Handle different option combinations and update the result accordingly
+      if (selectedOperator === "constant") {
+        resultElement.textContent = "Result: " + operationResult;
+      } else if (selectedOperator === "argument") {
+        resultElement.textContent = "Result: " + operationResult;
+      } else if (selectedOperator === "and" || selectedOperator === "or") {
+        if (operationResult === undefined) {
+          resultElement.textContent = "Result: undefined";
+        } else {
+          resultElement.textContent = "Result: " + operationResult;
+        }
+      }
+    }
+  </script>
+</body>
+</html>
